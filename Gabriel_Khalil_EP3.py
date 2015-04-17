@@ -32,6 +32,9 @@ lista = arquivo.readlines()
 
 CAL_dic = {}
 tab = {}
+tabg = {}
+tabp = {}
+tabc = {}
 
 for l in lista[1:]:
     pedacos = l.strip().split(",")
@@ -39,7 +42,12 @@ for l in lista[1:]:
     
     # Dicionario que vai ser a tabela de calorias para cada alimento. Cal/100g
     tab[pedacos[0]] = float(pedacos[2])/float(pedacos[1])
-    #print (tab)
+    # Dicionario que vai ser a tabela de gorduras para cada alimento. G/100g
+    tabg[pedacos[0]] = float(pedacos[5])/float(pedacos[1])
+    # Dicionario que vai ser a tabela de PROTEINAS para cada alimento. P/100g
+    tabp[pedacos[0]] = float(pedacos[3])/float(pedacos[1])
+    # Dicionario que vai ser a tabela de CARBOIDRATOS para cada alimento. C/100g
+    tabc[pedacos[0]] = float(pedacos[4])/float(pedacos[1])
     
 ###############################################################################
 """
@@ -98,16 +106,64 @@ for n in listau[1:2]:
     altura = float(pedacosu[4])
     fator = pedacosu[5]
     
+    
+""" 
+Tabela com calorias consumidas por dia
+"""
+    
 for c in listau[3:]:
     comeu = c.strip().split(';')
-    
+    #print (comeu)
     if comeu[0] in tabu:
         tabu[comeu[0]] += tab[comeu[1]]*float(comeu[2])
     else:
         tabu[comeu[0]] = tab[comeu[1]]*float(comeu[2])
         
 print(tabu)
+###############################################################################
+"""
+Tabela com gorduras consumidas por dia
+"""
+tabug = {}
 
+for go in listau[3:]:
+    gordo = go.strip().split(';')
+    #print (gordo)
+    if gordo[0] in tabug:
+        tabug[gordo[0]] += tabg[gordo[1]]*float(gordo[2])
+    else:
+        tabug[gordo[0]] = tabg[gordo[1]]*float(gordo[2])
+print(tabug)
+    
+###############################################################################
+"""
+Tabela com carboidratos consumidos por dia
+"""
+tabuc = {}
+
+for ca in listau[3:]:
+    carboi = ca.strip().split(';')
+    #print (carboi)
+    if carboi[0] in tabuc:
+        tabuc[carboi[0]] += tabc[carboi[1]]*float(carboi[2])
+    else:
+        tabuc[carboi[0]] = tabc[carboi[1]]*float(carboi[2])
+print(tabuc)
+###############################################################################
+"""
+Tabela com proteinas consumidas por dia
+"""
+tabup = {}
+
+for po in listau[3:]:
+    pro = po.strip().split(';')
+    #print (pro)
+    if pro[0] in tabup:
+        tabup[pro[0]] += tabp[pro[1]]*float(pro[2])
+    else:
+        tabup[pro[0]] = tabp[pro[1]]*float(pro[2])
+print(tabup)
+###############################################################################
 ###############################################################################
 """
 Fórmula de Harris-Benedict para homens.
