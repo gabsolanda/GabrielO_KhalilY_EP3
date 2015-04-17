@@ -65,6 +65,7 @@ proteina = {}
 for p in lista[1:]:
     prote = p.strip().split(',')
     proteina[prote[0]] = float(prote[3])/float(prote[1])
+    #print (proteina)
 ###############################################################################   
 """
 Recolhendo os dados das CARBOIDRATOS do arquivo alimentos.csv e salvando em um 
@@ -76,7 +77,7 @@ carboidratos = {}
 for c in lista[1:]:
     carbo = c.strip().split(',')
     carboidratos[carbo[0]] = float(carbo[4])/float(carbo[1])
-
+    #print (carboidratos)
 ###############################################################################   
 """   
 Abre o arquivo com os dados do usuário.  
@@ -116,6 +117,25 @@ M = 0
 
 if sexo == 'F':
     f = TMBwoman(idade, peso, altura)
+    if fator == 'minimo':
+        at = f * 1.2
+        print(at)
+       
+    elif fator == 'baixo':
+        at = f * 1.375
+        print(at)
+       
+    elif fator =='medio':
+        at = f * 1.55
+        print(at)
+       
+    elif fator == 'alto':
+        at = f * 1.725
+        print(at)
+       
+    elif fator == 'muito ativo':
+        at = f * 1.9
+        print(at)
 
 ###############################################################################    
 """
@@ -123,14 +143,30 @@ Fórmula de Harris-Benedict para mulheres.
 
 """
 if sexo == 'M':   
-   m = TMBman(idade, peso, altura)
-   print (m)
+    m = TMBman(idade, peso, altura)
+    #print (m)
+    if fator == 'minimo':
+        at = m * 1.2
+        print(at)
+       
+    elif fator == 'baixo':
+        at = m * 1.375
+        print(at)
+       
+    elif fator =='medio':
+        at = m * 1.55
+        print(at)
+       
+    elif fator == 'alto':
+        at = m * 1.725
+        print(at)
+       
+    elif fator == 'muito ativo':
+        at = m * 1.9
+        print(at)
+    
+
    
-
-    
-    
-
-
 
 
 
