@@ -11,6 +11,7 @@ Dupla:
 Fazendo os imports
 """
 import doctest
+import matplotlib.pyplot as plt
 
 ###############################################################################
 """
@@ -228,6 +229,7 @@ Fazendo uma lista com as datas para fazer o dicionário
 DATAS = []
 for dt in tabug.keys():
     DATAS.append(dt)
+    
 print (DATAS)
 ###############################################################################
 """
@@ -295,9 +297,9 @@ def IMC (peso, altura):
     """
     Calculando o IMC do usuário
     >>> IMC (70, 1.64)
-    55.487804878048784
+    33.834027364663896
     """
-    return 1.3 * (peso/altura)
+    return 1.3 * (peso/altura**2)
     
 if __name__=="__main__":
     doctest.testmod(verbose="True")
@@ -315,6 +317,37 @@ elif 25 <= imc and imc <= 29.9:
     
 elif 30 <= imc:
     print ("Cuidado, procure um especialista pois você está obeso(a)")
+    
+dias = []
+for i in range(0, len(DATAS)):
+    w = str(DATAS[i])
+    w = w.split('/')
+    dias.append(float(w[0]))
+print (dias)
+    
+#recomendado
+listar=[at]*len(dias)    
+###############################################################################
+"""
+Fazendo gráficos
+"""
+plt.plot(dias, CAL, label = 'Consumidas')
+plt.axis([6, max(dias), 0, 3000])
+plt.plot(dias, listar, label = 'Recomendado')
+plt.ylabel('Calorias [kcal]')
+plt.xlabel('Dias')
+plt.title(r'Quantidade de Calorias')
+plt.legend()
+plt.show()
+
+plt.plot(dias, GORD)
+plt.plot(dias, CAR)
+plt.plot(dias, PRO)
+plt.axis([6, max(dias), 0, 200])
+plt.ylabel('Gorduras;\n Carboidratos;\n Proteínas;')
+plt.xlabel('Dias')
+plt.title(r'Quantidade de Carboidratos, Proteínas e Gorduras')
+plt.show()
 
 
 
