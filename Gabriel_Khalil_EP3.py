@@ -8,15 +8,37 @@ Dupla:
 """
 ###############################################################################
 """
+Fazendo os imports
+"""
+import doctest
+
+###############################################################################
+"""
 Definindo as funções de TMB
 """
 #Fórmula de Harris-Benedict para MULHERES.
 def TMBwoman (idade, peso, altura):
+    """
+    Calcula TMB para mulheres
+    >>> TMBwoman (30, 70, 1.64)
+    967.684
+    """
     return 447.6+(9.2*peso)+(3.1*altura)-(4.3*idade)
+    
+if __name__=="__main__":
+    doctest.testmod(verbose="True")
         
 #Fórmula de Harris-Benedict para HOMENS.
 def TMBman (idade, peso, altura):
+    """
+    Calcula o TMB para homens
+    >>> TMBman(30, 70, 1.64)
+    860.444
+    """
     return 88.36+(13.4*peso)+(3.1*altura)-(5.7*idade)
+    
+if __name__=="__main__":
+    doctest.testmod(verbose="True")
 
         
 ###############################################################################
@@ -164,6 +186,40 @@ for po in listau[3:]:
         tabup[pro[0]] = tabp[pro[1]]*float(pro[2])
 print(tabup)
 ###############################################################################
+"""
+Fazendo uma lista para o gráfico com as CALORIAS consumidas
+"""
+CAL = []
+for cal in tabu.values():
+    CAL.append(cal)
+print (CAL)
+
+###############################################################################
+"""
+Fazendo uma lista para o gráfico com as GORDURAS consumidas
+"""
+GORD = []
+for gor in tabug.values():
+    GORD.append(gor)
+print (GORD)
+
+###############################################################################
+"""
+Fazendo uma lista para o gráfico com os CARBOIDRATOS consumidos
+"""
+CAR = []
+for car in tabuc.values():
+    CAR.append(car)
+print (CAR)
+
+###############################################################################
+"""
+Fazendo uma lista para o gráfico com as PROTEÍNAS consumidas
+"""
+PRO = []
+for pro in tabup.values():
+    PRO.append(pro)
+print (PRO)
 ###############################################################################
 """
 Fórmula de Harris-Benedict para homens.
@@ -221,9 +277,35 @@ if sexo == 'M':
         at = m * 1.9
         print(at)
     
-
+###############################################################################
    
-
+"""
+Calculando o IMC do usuário e determinando se o usuário esta gordo ou não.
+"""
+def IMC (peso, altura):
+    """
+    Calculando o IMC do usuário
+    >>> IMC (70, 1.64)
+    55.487804878048784
+    """
+    return 1.3 * (peso/altura)
+    
+if __name__=="__main__":
+    doctest.testmod(verbose="True")
+    
+imc = IMC (peso, altura)
+    
+if 18.5 <= imc and imc <= 24.9:
+    print ("Parabéns, você está com um IMC apropriado para sua estatura")
+    
+elif imc < 18.5:
+    print ("Procure um especialista, você está abaixo do peso")
+    
+elif 25 <= imc and imc <= 29.9:
+    print ("Procure um especialista, você etá acima do peso (Sobrepeso)")
+    
+elif 30 <= imc:
+    print ("Cuidado, procure um especialista pois você está obeso(a)")
 
 
 
