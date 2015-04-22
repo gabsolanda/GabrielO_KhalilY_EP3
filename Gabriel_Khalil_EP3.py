@@ -142,7 +142,7 @@ for c in listau[3:]:
     else:
         tabu[comeu[0]] = tab[comeu[1]]*float(comeu[2])
         
-print(tabu)
+#print(tabu)
 ###############################################################################
 """
 Tabela com gorduras consumidas por dia
@@ -156,7 +156,7 @@ for go in listau[3:]:
         tabug[gordo[0]] += tabg[gordo[1]]*float(gordo[2])
     else:
         tabug[gordo[0]] = tabg[gordo[1]]*float(gordo[2])
-print(tabug)
+#print(tabug)
     
 ###############################################################################
 """
@@ -171,7 +171,7 @@ for ca in listau[3:]:
         tabuc[carboi[0]] += tabc[carboi[1]]*float(carboi[2])
     else:
         tabuc[carboi[0]] = tabc[carboi[1]]*float(carboi[2])
-print(tabuc)
+#print(tabuc)
 ###############################################################################
 """
 Tabela com proteinas consumidas por dia
@@ -185,7 +185,7 @@ for po in listau[3:]:
         tabup[pro[0]] += tabp[pro[1]]*float(pro[2])
     else:
         tabup[pro[0]] = tabp[pro[1]]*float(pro[2])
-print(tabup)
+#print(tabup)
 ###############################################################################
 """
 Fazendo uma lista para o gráfico com as CALORIAS consumidas
@@ -193,7 +193,7 @@ Fazendo uma lista para o gráfico com as CALORIAS consumidas
 CAL = []
 for cal in tabu.values():
     CAL.append(cal)
-print (CAL)
+#print (CAL)
 
 ###############################################################################
 """
@@ -202,7 +202,7 @@ Fazendo uma lista para o gráfico com as GORDURAS consumidas
 GORD = []
 for gor in tabug.values():
     GORD.append(gor)
-print (GORD)
+#print (GORD)
 
 ###############################################################################
 """
@@ -211,7 +211,7 @@ Fazendo uma lista para o gráfico com os CARBOIDRATOS consumidos
 CAR = []
 for car in tabuc.values():
     CAR.append(car)
-print (CAR)
+#print (CAR)
 
 ###############################################################################
 """
@@ -220,7 +220,7 @@ Fazendo uma lista para o gráfico com as PROTEÍNAS consumidas
 PRO = []
 for pro in tabup.values():
     PRO.append(pro)
-print (PRO)
+#print (PRO)
 
 ##---##---##---##---##---##---##---##---##---##---##---##---##---##---##---##--
 """
@@ -230,7 +230,7 @@ DATAS = []
 for dt in tabug.keys():
     DATAS.append(dt)
     
-print (DATAS)
+#print (DATAS)
 ###############################################################################
 """
 Fórmula de Harris-Benedict para homens.
@@ -293,6 +293,7 @@ if sexo == 'M':
 """
 Calculando o IMC do usuário e determinando se o usuário esta gordo ou não.
 """
+
 def IMC (peso, altura):
     """
     Calculando o IMC do usuário
@@ -305,25 +306,44 @@ if __name__=="__main__":
     doctest.testmod(verbose="True")
     
 imc = IMC (peso, altura)
-    
+
+for c in tabu.values():
+    delta = at - c
+#print (delta)
+
 if 18.5 <= imc and imc <= 24.9:
-    print ("Parabéns, você está com um IMC apropriado para sua estatura")
-    
+    texto = open("arquivo.txt", "w")
+    texto.writelines(str(imc)+'. Parabéns, você está com um IMC apropriado para sua estatura. Você comeu' + "str(delta)" + "kcal")
+    texto.close()
+
 elif imc < 18.5:
-    print ("Procure um especialista, você está abaixo do peso")
+    texto = open("arquivo.txt", "w")
+    texto.writelines(str(imc)+'. Procure um especialista, você está abaixo do peso')
+    texto.close()
+    
     
 elif 25 <= imc and imc <= 29.9:
-    print ("Procure um especialista, você etá acima do peso (Sobrepeso)")
+    texto = open("arquivo.txt", "w")
+    texto.writelines(str(imc)+'. Procure um especialista, você etá acima do peso (Sobrepeso)')
+    texto.close()
     
-elif 30 <= imc:
-    print ("Cuidado, procure um especialista pois você está obeso(a)")
     
+elif imc >= 30:
+    texto = open("arquivo.txt", "w")
+    texto.writelines(str(imc)+'. Cuidado, procure um especialista pois você está obeso(a).Você comeu ' + str(delta) + " kcal")
+    texto.close()
+                
+###############################################################################
+"""
+Arrumando as listas das datas para fazer os gráficos
+"""
+
 dias = []
 for i in range(0, len(DATAS)):
     w = str(DATAS[i])
     w = w.split('/')
     dias.append(float(w[0]))
-print (dias)
+#print (dias)
     
 #recomendado
 listar=[at]*len(dias)    
@@ -340,13 +360,14 @@ plt.title(r'Quantidade de Calorias')
 plt.legend()
 plt.show()
 
-plt.plot(dias, GORD)
-plt.plot(dias, CAR)
-plt.plot(dias, PRO)
+plt.plot(dias, GORD, label = 'Gorduras')
+plt.plot(dias, CAR, label = 'Carboidratos')
+plt.plot(dias, PRO, label = 'Proteínas')
 plt.axis([6, max(dias), 0, 200])
-plt.ylabel('Gorduras;\n Carboidratos;\n Proteínas;')
+plt.ylabel('Gorduras (g);\n Carboidratos (g);\n Proteínas (g);')
 plt.xlabel('Dias')
 plt.title(r'Quantidade de Carboidratos, Proteínas e Gorduras')
+plt.legend()
 plt.show()
 
 
