@@ -220,6 +220,15 @@ PRO = []
 for pro in tabup.values():
     PRO.append(pro)
 print (PRO)
+
+##---##---##---##---##---##---##---##---##---##---##---##---##---##---##---##--
+"""
+Fazendo uma lista com as datas para fazer o dicionário
+"""
+DATAS = []
+for dt in tabug.keys():
+    DATAS.append(dt)
+print (DATAS)
 ###############################################################################
 """
 Fórmula de Harris-Benedict para homens.
